@@ -16,7 +16,7 @@ import csv
 
 THREADS = 20
 RETROSHEET_URL = "http://www.retrosheet.org/game.htm"
-CHADWICK = "/usr/local/chadwick/bin/"
+CHADWICK = "/usr/local/bin/"
 
 config = ConfigParser.ConfigParser()
 config.readfp(open('db.ini'))
@@ -35,6 +35,7 @@ except ConfigParser.NoOptionError:
     raise SystemExit
 
 if USER and PASSWORD: string = '%s://%s:%s@%s/%s' % (ENGINE, USER, PASSWORD, HOST, DATABASE)
+elif USER: string = '%s://%s@%s/%s' % (ENGINE, USER, HOST, DATABASE)
 else:  string = '%s://%s/%s' % (ENGINE, HOST, DATABASE)
 
 try:
@@ -45,7 +46,7 @@ except:
     raise SystemExit
 
 
-if SCHEMA: conn.execute('SET search_path TO %s' % SCHEMA)
+#if SCHEMA: conn.execute('SET search_path TO %s' % SCHEMA)
 
 
 class Parser(threading.Thread):
