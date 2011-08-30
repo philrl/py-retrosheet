@@ -46,7 +46,7 @@ except:
     raise SystemExit
 
 
-#if SCHEMA: conn.execute('SET search_path TO %s' % SCHEMA)
+if SCHEMA: conn.execute('SET search_path TO %s' % SCHEMA)
 
 
 class Parser(threading.Thread):
